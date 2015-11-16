@@ -17,7 +17,6 @@ import com.gu.baselibrary.view.LoadingDialog;
 
 import java.lang.reflect.Field;
 
-import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
 
@@ -101,8 +100,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.inject(this, view);
-
         // 初始化屏幕相关数据
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -110,12 +107,6 @@ public abstract class BaseFragment extends Fragment {
         mScreenHeight = displayMetrics.heightPixels;
         mScreenWidth = displayMetrics.widthPixels;
         initViewsAndEvents();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.reset(this);
     }
 
     @Override

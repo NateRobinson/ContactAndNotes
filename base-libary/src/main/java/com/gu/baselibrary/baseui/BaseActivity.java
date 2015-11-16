@@ -24,7 +24,6 @@ import com.gu.baselibrary.utils.NetUtils;
 import com.gu.baselibrary.utils.SmartBarUtils;
 import com.gu.baselibrary.view.LoadingDialog;
 
-import butterknife.ButterKnife;
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
 
@@ -153,14 +152,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     @Override
-    public void setContentView(int layoutResID) {
-        super.setContentView(layoutResID);
-        //初始化ButterKnife
-        ButterKnife.inject(this);
-    }
-
-
-    @Override
     public void finish() {
         super.finish();
         ActivityCollections.getInstance().removeActivity(this);
@@ -191,7 +182,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ButterKnife.reset(this);
         //看看是否绑定了EventBus
         if (isBindEventBus()) {
             EventBus.getDefault().unregister(this);
@@ -304,11 +294,6 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 展示一个等待框
      */
     protected void showLoadingDialog() {
-//        if (null == dialog) {
-//            dialog = new LoadingDialog(this);
-//            dialog.setCancelable(false);
-//        }
-//        dialog.show();
        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
                 .setTitleText("Loading");
         pDialog.show();
@@ -365,9 +350,6 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 取消一个等待框
      */
     protected void dismissLoadingDialog() {
-//        if (null != dialog) {
-//            dialog.dismiss();
-//        }
         if(null != pDialog){
             pDialog.dismiss();
         }

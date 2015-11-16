@@ -6,6 +6,9 @@ import android.os.StrictMode;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
+import org.xutils.BuildConfig;
+import org.xutils.x;
+
 import cat.ereza.customactivityoncrash.CustomActivityOnCrash;
 
 import static android.os.Build.VERSION.SDK_INT;
@@ -28,6 +31,8 @@ public class BaseApplication extends Application {
         ImageLoaderConfiguration configuration = ImageLoaderConfiguration.createDefault(this);
         //Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(configuration);
+        x.Ext.init(this);
+        x.Ext.setDebug(BuildConfig.DEBUG);
     }
 
     /**

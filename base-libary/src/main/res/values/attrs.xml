@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <attr name="mytabViews" format="reference"/>
-    <attr name="iconWidth" format="dimension"/>
-    <attr name="iconHeight" format="dimension"/>
 
-    <declare-styleable name="MyTabViews">
-        <attr name="mytabViews"/>
-        <attr name="iconWidth"/>
-        <attr name="iconHeight"/>
+    <declare-styleable name="MaterialLockView">
+        <attr name="LOCK_COLOR" format="color"/>
+        <attr name="WRONG_COLOR" format="color"/>
+        <attr name="CORRECT_COLOR" format="color"/>
     </declare-styleable>
-
 
     <declare-styleable name="PullToRefresh">
 
