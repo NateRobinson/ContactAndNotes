@@ -10,11 +10,10 @@ import android.widget.EditText;
 
 import com.gu.baselibrary.utils.NetUtils;
 import com.gu.baselibrary.view.MaterialLockView;
+import com.lidroid.xutils.view.annotation.ViewInject;
 import com.nate.contactandnotes.R;
 import com.nate.contactandnotes.activity.base.CNBaseActivity;
 
-import org.xutils.view.annotation.ContentView;
-import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
 

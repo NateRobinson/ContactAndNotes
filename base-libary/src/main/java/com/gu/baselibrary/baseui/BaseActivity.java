@@ -23,6 +23,7 @@ import com.gu.baselibrary.netstatus.NetStatusReceiver;
 import com.gu.baselibrary.utils.NetUtils;
 import com.gu.baselibrary.utils.SmartBarUtils;
 import com.gu.baselibrary.view.LoadingDialog;
+import com.lidroid.xutils.ViewUtils;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
@@ -140,6 +141,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         NetStatusReceiver.registerNetworkStateReceiver(this);
         NetStatusReceiver.registerNetChangeCallBack(mNetChangeCallBack);
         initViewsAndEvents();
+    }
+
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        ViewUtils.inject(this); //注入view和事件
     }
 
     @Override
