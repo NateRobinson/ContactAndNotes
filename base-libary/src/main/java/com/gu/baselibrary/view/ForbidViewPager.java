@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 /**
- * Created by ZhuJie on 2015/11/12.
+ * Created by ZhuJie on 2015/11/12.可以控制能否滑动的ViewPager
  */
 public class ForbidViewPager extends ViewPager{
     private boolean isCanScroll = false;
