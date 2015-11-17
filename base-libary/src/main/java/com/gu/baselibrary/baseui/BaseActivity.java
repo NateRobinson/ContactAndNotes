@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -14,15 +13,14 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.flyco.dialog.listener.OnBtnLeftClickL;
-import com.flyco.dialog.listener.OnBtnRightClickL;
-import com.flyco.dialog.widget.MaterialDialog;
 import com.gu.baselibrary.R;
 import com.gu.baselibrary.netstatus.NetChangeCallBack;
 import com.gu.baselibrary.netstatus.NetStatusReceiver;
 import com.gu.baselibrary.utils.NetUtils;
 import com.gu.baselibrary.utils.SmartBarUtils;
 import com.gu.baselibrary.view.LoadingDialog;
+
+import org.xutils.x;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
@@ -93,7 +91,6 @@ public abstract class BaseActivity extends AppCompatActivity {
             }
         }
         super.onCreate(savedInstanceState);
-
         Bundle extras = getIntent().getExtras();
         // 如果有extras，则在getBundleExtras（）进行处理
         if (null != extras) {
@@ -123,7 +120,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else {
             throw new IllegalArgumentException("You must return a right contentView layout resource Id");
         }
-
         // 网络监听器
         mNetChangeCallBack = new NetChangeCallBack() {
             @Override
@@ -136,17 +132,16 @@ public abstract class BaseActivity extends AppCompatActivity {
                 doOnNetworkDisConnected();
             }
         };
-
         NetStatusReceiver.registerNetworkStateReceiver(this);
         NetStatusReceiver.registerNetChangeCallBack(mNetChangeCallBack);
         initViewsAndEvents();
     }
 
-//    @Override
-//    public void setContentView(int layoutResID) {
-//        super.setContentView(layoutResID);
-//        ViewUtils.inject(this); //注入view和事件
-//    }
+    @Override
+    public void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        x.view().inject(this); //注入view和事件
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

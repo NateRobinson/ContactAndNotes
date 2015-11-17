@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import com.gu.baselibrary.view.LoadingDialog;
 
+import org.xutils.x;
+
 import java.lang.reflect.Field;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
@@ -100,6 +102,8 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        x.view().inject(this, this.getView());
+
         // 初始化屏幕相关数据
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
