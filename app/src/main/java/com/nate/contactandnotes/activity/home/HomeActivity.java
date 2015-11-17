@@ -15,7 +15,7 @@ import com.nate.contactandnotes.activity.base.CNBaseActivity;
 import com.nate.contactandnotes.fragment.ContactsFragment;
 import com.nate.contactandnotes.fragment.MySettingFragment;
 import com.nate.contactandnotes.fragment.NotesFragment;
-import com.nate.contactandnotes.model.TabEntity;
+import com.nate.contactandnotes.model.TabModel;
 
 import org.xutils.view.annotation.ViewInject;
 
@@ -104,7 +104,7 @@ public class HomeActivity extends CNBaseActivity {
     protected void initViewsAndEvents() {
         setCustomToolbar(ToolbarType.NOBACK, titles[0]);
         for (int i = 0; i < titles.length; i++) {
-            tabs.add(new TabEntity(titles[i], iconSelectedIds[i], iconUnselectIds[i]));
+            tabs.add(new TabModel(titles[i], iconSelectedIds[i], iconUnselectIds[i]));
         }
         fragments.add(new NotesFragment());
         fragments.add(new ContactsFragment());
