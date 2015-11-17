@@ -1,12 +1,6 @@
-package com.nate.contactandnotes.activity;
+package com.nate.contactandnotes.activity.start;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 
 import com.gu.baselibrary.utils.NetUtils;
 import com.gu.baselibrary.view.MaterialLockView;
@@ -17,15 +11,14 @@ import org.xutils.view.annotation.ViewInject;
 
 import java.util.List;
 
-public class MainActivity extends CNBaseActivity {
+/**
+ * Created by Nate on 2015/11/17  手势密码验证页面
+ */
+public class GesturePasswordActivity extends CNBaseActivity {
 
-    @ViewInject(R.id.correct_pattern_edittext)
-    private EditText correct_pattern_edittext;
-    @ViewInject(R.id.pattern)
+    @ViewInject(R.id.gesture_password_view)
     private MaterialLockView materialLockView;
-    @ViewInject(R.id.stealthmode)
-    private CheckBox stealthmode;
-    private String CorrectPattern;
+    private String CorrectPattern = "123";
 
     /**
      * 绑定布局文件
@@ -34,7 +27,7 @@ public class MainActivity extends CNBaseActivity {
      */
     @Override
     protected int getContentViewLayoutID() {
-        return R.layout.activity_main;
+        return R.layout.gesture_password_activity_layout;
     }
 
     /**
@@ -88,10 +81,10 @@ public class MainActivity extends CNBaseActivity {
      */
     @Override
     protected void initViewsAndEvents() {
+        setCustomToolbar(ToolbarType.NOBACK, R.string.title_gesture_password_string);
         materialLockView.setOnPatternListener(new MaterialLockView.OnPatternListener() {
             @Override
             public void onPatternDetected(List<MaterialLockView.Cell> pattern, String SimplePattern) {
-                Log.e("guxuewu", SimplePattern);
                 if (!SimplePattern.equals(CorrectPattern))
                     materialLockView.setDisplayMode(MaterialLockView.DisplayMode.Wrong);
                 else
@@ -99,29 +92,6 @@ public class MainActivity extends CNBaseActivity {
                 super.onPatternDetected(pattern, SimplePattern);
             }
         });
-        stealthmode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                materialLockView.setInStealthMode(isChecked);
-            }
-        });
-        correct_pattern_edittext.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                CorrectPattern = "" + s;
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
     }
 
 
