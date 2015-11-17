@@ -65,7 +65,7 @@ public class GesturePasswordActivity extends CNBaseActivity {
      */
     @Override
     protected boolean isCustomPendingTransition() {
-        return true;
+        return false;
     }
 
     /**
@@ -73,7 +73,7 @@ public class GesturePasswordActivity extends CNBaseActivity {
      */
     @Override
     protected TransitionMode getCustomPendingTransitionType() {
-        return TransitionMode.SCALE;
+        return null;
     }
 
     /**
@@ -81,7 +81,7 @@ public class GesturePasswordActivity extends CNBaseActivity {
      */
     @Override
     protected void initViewsAndEvents() {
-        setCustomToolbar(ToolbarType.NOBACK, R.string.title_gesture_password_string);
+        setCustomToolbar(ToolbarType.WITHBACK, R.string.title_gesture_password_string);
         materialLockView.setOnPatternListener(new MaterialLockView.OnPatternListener() {
             @Override
             public void onPatternDetected(List<MaterialLockView.Cell> pattern, String SimplePattern) {

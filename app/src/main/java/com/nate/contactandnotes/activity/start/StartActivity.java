@@ -7,6 +7,7 @@ import android.os.Message;
 import com.gu.baselibrary.utils.NetUtils;
 import com.nate.contactandnotes.R;
 import com.nate.contactandnotes.activity.base.CNBaseActivity;
+import com.nate.contactandnotes.activity.home.HomeActivity;
 
 
 /**
@@ -22,7 +23,7 @@ public class StartActivity extends CNBaseActivity {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case GO_TO_GESTURE_PASSWORD_ACTIVITY:
-                    goThenKill(GesturePasswordActivity.class);
+                    goThenKill(HomeActivity.class);
                     break;
                 default:
                     break;
@@ -75,7 +76,7 @@ public class StartActivity extends CNBaseActivity {
      */
     @Override
     protected boolean isCustomPendingTransition() {
-        return true;
+        return false;
     }
 
     /**
@@ -83,7 +84,7 @@ public class StartActivity extends CNBaseActivity {
      */
     @Override
     protected TransitionMode getCustomPendingTransitionType() {
-        return TransitionMode.SCALE;
+        return null;
     }
 
     /**
