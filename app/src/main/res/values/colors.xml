@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- 系统配色-->
+    <color name="colorPrimary">#4CAF50</color>
+    <color name="colorPrimaryDark">#388E3C</color>
+    <color name="colorAccent">#4CAF50</color>
+    <color name="light_primary_color">#C8E6C9</color>
+    <color name="text_primary_color">@color/white</color>
+    <!-- title文字颜色-->
+    <color name="primary_text_color">#212121</color>
+    <!-- 内容字体颜色-->
+    <color name="secondary_text_color">#727272</color>
+    <!-- 线条颜色-->
+    <color name="divider_color">#B6B6B6</color>
 
+
+
+    <!-- 常用颜色库-->
     <color name="white">#FFFFFF</color>
-    <color name="black">#080808</color>
-    <color name="toolbar_text_color">#101010</color>
-    <color name="toolbar_background_color">#0df511</color>
-
 </resources>
