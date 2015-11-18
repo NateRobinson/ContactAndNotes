@@ -110,8 +110,10 @@ public class HomeActivity extends CNBaseActivity {
         fragments.add(new ContactsFragment());
         fragments.add(new MySettingFragment());
         mCommonTabLayout.setTabData(tabs);
+
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-        mViewPager.setCurrentItem(0);
+        mViewPager.setCurrentItem(0, false);
         mViewPager.setScanScroll(false);//关闭viewpager的滑动功能
 
         //两位数 可以用来设置提示消息
@@ -120,7 +122,7 @@ public class HomeActivity extends CNBaseActivity {
         mCommonTabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-                mViewPager.setCurrentItem(position);
+                mViewPager.setCurrentItem(position, false);
                 setCustomToolbar(ToolbarType.NOBACK, titles[position]);
             }
 
