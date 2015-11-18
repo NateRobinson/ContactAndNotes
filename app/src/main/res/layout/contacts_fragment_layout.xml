@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:poplar="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+    tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contacts"
-        android:textColor="@color/primary_text_color"
-        android:textSize="@dimen/text_font_size_big_24sp" />
-</LinearLayout>
+    <ListView
+        android:id="@+id/contacts_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@color/transparent"></ListView>
+
+    <com.gu.baselibrary.view.FancyIndexer
+        android:id="@+id/contacts_fancy_indexer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        poplar:additionalTipOffset="40dip"
+        poplar:fontColor="@color/primary_text_color"
+        poplar:maxBezierHeight="150dip"
+        poplar:maxBezierWidth="180dip"
+        poplar:maxFontSize="60"
+        poplar:minFontSize="32"
+        poplar:tipFontSize="72"
+        poplar:widthOffset="15dp" />
+
+</RelativeLayout>

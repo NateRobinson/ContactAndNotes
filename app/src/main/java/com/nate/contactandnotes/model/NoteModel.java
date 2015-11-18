@@ -3,13 +3,15 @@ package com.nate.contactandnotes.model;
 import org.xutils.db.annotation.Column;
 import org.xutils.db.annotation.Table;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  * Created by Nate on 2015/11/17.笔记实体类
  */
 @Table(name = "notemodel")
-public class NoteModel {
+public class NoteModel implements Serializable {
+
     @Column(name = "id", isId = true)
     private int id;//每一条笔记的唯一id
     @Column(name = "title")

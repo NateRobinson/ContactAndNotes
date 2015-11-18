@@ -37,4 +37,5 @@ dependencies {
     compile 'cat.ereza:customactivityoncrash:1.4.0'
     compile files('libs/xUtils-2.6.2.jar')
     compile 'org.xutils:xutils:3.0'
+    compile files('libs/pinyin4j-2.5.0.jar')
 }

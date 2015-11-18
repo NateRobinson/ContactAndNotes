@@ -1,12 +1,40 @@
 package com.nate.contactandnotes.fragment;
 
+import android.os.Handler;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.gu.baselibrary.view.FancyIndexer;
 import com.nate.contactandnotes.R;
+import com.nate.contactandnotes.adapter.ContactsListViewAdapter;
 import com.nate.contactandnotes.fragment.base.CNBaseFragment;
+import com.nate.contactandnotes.model.ContactModel;
+import com.nate.contactandnotes.temp.Cheeses;
+
+import org.xutils.view.annotation.ViewInject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Nate on 2015/11/17.联系人列表界面
  */
 public class ContactsFragment extends CNBaseFragment {
+
+    @ViewInject(R.id.contacts_lv)
+    private ListView mListView;
+    @ViewInject(R.id.contacts_fancy_indexer)
+    private FancyIndexer mFancyIndexer;
+    private Handler mHandler = new Handler();
+    private List<ContactModel> contacts = new ArrayList<>();
+    private ContactsListViewAdapter mAdapter;
+    private View headView;
+
     /**
      * @return Fragment绑定的布局文件id
      */
@@ -52,6 +80,69 @@ public class ContactsFragment extends CNBaseFragment {
      */
     @Override
     protected void initViewsAndEvents() {
+        // 填充数据, 并排序
+        fillAndSortData();
+        mAdapter = new ContactsListViewAdapter(getContext(), R.layout.contacts_fragment_item_layout, contacts);
+        mListView.setAdapter(mAdapter);
+        headView = LayoutInflater.from(getContext()).inflate(R.layout.contacts_fragment_header_layout, null);
+        mListView.addHeaderView(headView, null, false);
+        mFancyIndexer.setOnTouchLetterChangedListener(new FancyIndexer.OnTouchLetterChangedListener() {
+            @Override
+            public void onTouchLetterChanged(String letter) {
+                //如果为向上的箭头，直接滑到最顶端
+                if (TextUtils.equals("↑", letter)) {
+                    mListView.setSelection(0);
+                    return;
+                }
+                // 从集合中查找第一个拼音首字母为letter的索引, 进行跳转
+                for (int i = 0; i < contacts.size(); i++) {
+                    ContactModel contactModel = contacts.get(i);
+                    String s = contactModel.getPinyin().charAt(0) + "";
+                    if (TextUtils.equals(s, letter)) {
+                        // 匹配成功, 中断循环, 跳转到i位置
+                        mListView.setSelection(i + 1);//因为这里加入了headview
+                        break;
+                    }
+                }
+            }
+        });
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position > 0) {
+                    ContactModel model = (ContactModel) parent.getAdapter().getItem(position);
+                    showToast(model.getName());
+                }
+            }
+        });
 
+        //设置headview点击监听
+        headView.findViewById(R.id.add_contact_ll).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("添加");
+            }
+        });
+        headView.findViewById(R.id.group_contact_ll).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("分组");
+            }
+        });
+    }
+
+
+    /**
+     * 填充,排序
+     */
+    private void fillAndSortData() {
+        String[] datas = null;
+        boolean china = getResources().getConfiguration().locale.getCountry().equals("CN");
+        datas = china ? Cheeses.NAMES : Cheeses.sCheeseStrings;
+        for (int i = 0; i < datas.length; i++) {
+            contacts.add(new ContactModel(datas[i]));
+        }
+        // 排序
+        Collections.sort(contacts);
     }
 }

@@ -3,29 +3,25 @@ package com.nate.contactandnotes.model;
 import org.xutils.db.annotation.Column;
 import org.xutils.db.annotation.Table;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 /**
  * Created by Administrator on 2015/11/17. 后期可以加入修改日志，用户每次做一次修改保存一次
  */
 @Table(name = "modifylogmodel")
-public class ModifyLogModel {
+public class ModifyLogModel implements Serializable {
 
     @Column(name = "id", isId = true)
     private int id;//自增长id
-
     @Column(name = "noteid")
     private int noteId;//属于哪个note
-
     @Column(name = "longitude")
     private double longitude;//位置经度
-
     @Column(name = "latitude")
     private double latitude;//位置维度
-
     @Column(name = "address")
     private String address;//地址信息
-
     @Column(name = "address")
     private Date modifyDate;//修改的时间
 

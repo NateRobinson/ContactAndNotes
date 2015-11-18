@@ -2,4 +2,6 @@
     <string name="app_name">ContactAndNotes</string>
     <string name="start_desc_string">启动页</string>
     <string name="title_gesture_password_string">手势密码</string>
+    <string name="content_add_contact_string">添加联系人</string>
+    <string name="content_contact_group_string">联系人分组</string>
 </resources>
