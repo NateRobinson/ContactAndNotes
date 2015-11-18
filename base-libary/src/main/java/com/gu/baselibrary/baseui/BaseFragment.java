@@ -33,15 +33,6 @@ public abstract class BaseFragment extends Fragment {
     protected static String TAG_LOG = null;
 
     /**
-     * 屏幕信息
-     */
-    protected int mScreenWidth = 0;
-
-    protected int mScreenHeight = 0;
-
-    protected float mScreenDensity = 0.0f;
-
-    /**
      * 上下文
      */
     protected Context mContext = null;
@@ -55,25 +46,6 @@ public abstract class BaseFragment extends Fragment {
     private boolean isPrepared = false;
 
     protected LoadingDialog dialog = null;
-    /**
-     * tablefragment
-     * */
-    private String title;
-    private int iconId = 0;
-
-    public String getTitle() {return title;}
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public int getIconId() {
-        return iconId;
-    }
-
-    public void setIconId(int iconId) {
-        this.iconId = iconId;
-    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -103,13 +75,6 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         x.view().inject(this, this.getView());
-
-        // 初始化屏幕相关数据
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        mScreenDensity = displayMetrics.density;
-        mScreenHeight = displayMetrics.heightPixels;
-        mScreenWidth = displayMetrics.widthPixels;
         initViewsAndEvents();
     }
 
@@ -124,7 +89,6 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        // for bug ---> java.lang.IllegalStateException: Activity has been destroyed
         try {
             Field childFragmentManager = Fragment.class.getDeclaredField("mChildFragmentManager");
             childFragmentManager.setAccessible(true);

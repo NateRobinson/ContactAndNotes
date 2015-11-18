@@ -6,18 +6,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.gu.baselibrary.R;
-import com.gu.baselibrary.netstatus.NetChangeCallBack;
-import com.gu.baselibrary.netstatus.NetStatusReceiver;
 import com.gu.baselibrary.utils.NetUtils;
 import com.gu.baselibrary.utils.SmartBarUtils;
+import com.gu.baselibrary.utils.Toastor;
 import com.gu.baselibrary.view.LoadingDialog;
 
 import org.xutils.x;
@@ -35,22 +31,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected static String TAG_LOG = null;
 
     /**
-     * 设备屏幕信息参数
-     */
-    protected int mScreenWidth = 0;
-
-    protected int mScreenHeight = 0;
-
-    protected float mScreenDensity = 0.0f;
-    /**
-     * 上下文全局变量
-     */
-    protected Context mContext = null;
-
-    /**
      * 网络状态监听
      */
-    protected NetChangeCallBack mNetChangeCallBack = null;
+    //protected NetChangeCallBack mNetChangeCallBack = null;
 
     /**
      * 等待框
@@ -63,8 +46,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     public enum TransitionMode {
         LEFT, RIGHT, TOP, BOTTOM, SCALE, FADE
     }
+
     private SweetAlertDialog pDialog;
-    private int i = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,16 +87,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         SmartBarUtils.hide(getWindow().getDecorView());
         // 是否全屏应用
         setTranslucentStatus(isApplyStatusBarTranslucency());
-        mContext = this;
         TAG_LOG = this.getClass().getSimpleName();
         // 页面堆栈管理
         ActivityCollections.getInstance().addActivity(this);
-        // 初始化屏幕相关信息
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        mScreenDensity = displayMetrics.density;
-        mScreenHeight = displayMetrics.heightPixels;
-        mScreenWidth = displayMetrics.widthPixels;
         // 给activity绑定布局文件
         if (getContentViewLayoutID() != 0) {
             setContentView(getContentViewLayoutID());
@@ -121,19 +97,19 @@ public abstract class BaseActivity extends AppCompatActivity {
             throw new IllegalArgumentException("You must return a right contentView layout resource Id");
         }
         // 网络监听器
-        mNetChangeCallBack = new NetChangeCallBack() {
-            @Override
-            public void onNetConnected(NetUtils.NetType type) {
-                doOnNetworkConnected(type);
-            }
-
-            @Override
-            public void onNetDisConnected() {
-                doOnNetworkDisConnected();
-            }
-        };
-        NetStatusReceiver.registerNetworkStateReceiver(this);
-        NetStatusReceiver.registerNetChangeCallBack(mNetChangeCallBack);
+        //mNetChangeCallBack = new NetChangeCallBack() {
+        //    @Override
+        //    public void onNetConnected(NetUtils.NetType type) {
+        //        doOnNetworkConnected(type);
+        //    }
+        //
+        //    @Override
+        //    public void onNetDisConnected() {
+        //        doOnNetworkDisConnected();
+        //    }
+        //    };
+        //NetStatusReceiver.registerNetworkStateReceiver(this);
+        //NetStatusReceiver.registerNetChangeCallBack(mNetChangeCallBack);
         initViewsAndEvents();
     }
 
@@ -187,8 +163,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (isBindEventBus()) {
             EventBus.getDefault().unregister(this);
         }
-        NetStatusReceiver.unRegisterNetworkStateReceiver(this);
-        NetStatusReceiver.removeRegisterNetChangeCallBack(mNetChangeCallBack);
+        //NetStatusReceiver.unRegisterNetworkStateReceiver(this);
+        //NetStatusReceiver.removeRegisterNetChangeCallBack(mNetChangeCallBack);
     }
 
     /**
@@ -274,9 +250,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param msg
      */
     protected void showToast(String msg) {
-        if (!TextUtils.isEmpty(msg)) {
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-        }
+        new Toastor(this).showSingletonToast(msg);
     }
 
     /**
@@ -285,54 +259,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * @param msgId
      */
     protected void showToast(int msgId) {
-        String msg = this.getApplicationContext().getResources().getString(msgId);
-        if (!TextUtils.isEmpty(msg)) {
-            Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    /**
-     * 展示一个等待框
-     */
-    protected void showLoadingDialog() {
-       pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE)
-                .setTitleText("Loading");
-        pDialog.show();
-        pDialog.setCancelable(false);
-        new CountDownTimer(Long.MAX_VALUE, 800) {
-            public void onTick(long millisUntilFinished) {
-                // you can change the progress bar color by ProgressHelper every 800 millis
-                i++;
-                switch (i){
-                    case 0:
-                        pDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.blue_btn_bg_color));
-                        break;
-                    case 1:
-                        pDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.material_deep_teal_50));
-                        break;
-                    case 2:
-                        pDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.success_stroke_color));
-                        break;
-                    case 3:
-                        pDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.material_deep_teal_20));
-                        break;
-                    case 4:
-                        pDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.material_blue_grey_80));
-                        break;
-                    case 5:
-                        pDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.warning_stroke_color));
-                        break;
-                    case 6:
-                        pDialog.getProgressHelper().setBarColor(getResources().getColor(R.color.success_stroke_color));
-                        break;
-                }
-            }
-
-            public void onFinish() {
-                i = -1;
-                pDialog.dismiss();
-            }
-        }.start();
+        new Toastor(this).showSingletonToast(msgId);
     }
 
     /**
@@ -351,7 +278,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      * 取消一个等待框
      */
     protected void dismissLoadingDialog() {
-        if(null != pDialog){
+        if (null != pDialog) {
             pDialog.dismiss();
         }
     }
@@ -383,7 +310,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected SweetAlertDialog showSweetDialogFail(String title, String content) {
         SweetAlertDialog sd = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE);
-        sd .setTitleText(title);
+        sd.setTitleText(title);
         sd.setContentText(content);
         sd.setConfirmText("确定");
         // 可以按返回取消
@@ -402,7 +329,7 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     protected SweetAlertDialog showSweetDialogPrompt(String title, String content) {
         SweetAlertDialog sd = new SweetAlertDialog(this);
-        sd .setTitleText(title);
+        sd.setTitleText(title);
         sd.setContentText(content);
         sd.setConfirmText("确定");
         // 可以按返回取消
@@ -412,11 +339,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         sd.show();
         return sd;
     }
+
     /**
      * 提示警告
-     * */
+     */
     protected SweetAlertDialog showSweetDialogConfirm(String title, String content) {
-        SweetAlertDialog sd = new SweetAlertDialog(this,SweetAlertDialog.WARNING_TYPE);
+        SweetAlertDialog sd = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
         sd.setTitleText(title);
         sd.setContentText(content);
         sd.setCancelText("取消");
