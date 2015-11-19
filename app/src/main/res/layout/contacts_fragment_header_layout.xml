@@ -36,7 +36,7 @@
         android:layout_height="1px"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="25dp"
-        android:background="@color/divider_color_low" />
+        android:background="@color/divider_color" />
 
     <LinearLayout
         android:id="@+id/group_contact_ll"

@@ -4,4 +4,9 @@
     <string name="title_gesture_password_string">手势密码</string>
     <string name="content_add_contact_string">添加联系人</string>
     <string name="content_contact_group_string">联系人分组</string>
+    <string name="content_add_by_phone_string">从手机联系人中导入</string>
+    <string name="content_add_by_create_string">手动添加联系人</string>
+    <string name="title_add_contact_string">添加联系人</string>
+
+
 </resources>

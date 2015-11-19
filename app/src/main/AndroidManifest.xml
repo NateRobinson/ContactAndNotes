@@ -33,6 +33,10 @@
             android:name=".activity.home.HomeActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.contact.NewContactActivity"
+            android:configChanges="screenSize|keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

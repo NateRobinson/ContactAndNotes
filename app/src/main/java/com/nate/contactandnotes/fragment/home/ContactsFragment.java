@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.gu.baselibrary.view.FancyIndexer;
 import com.nate.contactandnotes.R;
+import com.nate.contactandnotes.activity.contact.NewContactActivity;
 import com.nate.contactandnotes.adapter.ContactsListViewAdapter;
 import com.nate.contactandnotes.fragment.base.CNBaseFragment;
 import com.nate.contactandnotes.model.ContactModel;
@@ -122,7 +123,7 @@ public class ContactsFragment extends CNBaseFragment {
         headView.findViewById(R.id.add_contact_ll).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("添加");
+                go(NewContactActivity.class);
             }
         });
         headView.findViewById(R.id.group_contact_ll).setOnClickListener(new View.OnClickListener() {
@@ -138,7 +139,7 @@ public class ContactsFragment extends CNBaseFragment {
 
     @Event(value = R.id.empty_add_ll)
     private void onEmptyAdd(View view) {
-        showToast("添加朋友");
+        go(NewContactActivity.class);
     }
 
     /**
