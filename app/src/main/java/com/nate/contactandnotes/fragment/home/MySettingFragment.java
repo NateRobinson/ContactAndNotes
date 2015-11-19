@@ -1,4 +1,4 @@
-package com.nate.contactandnotes.fragment;
+package com.nate.contactandnotes.fragment.home;
 
 import com.nate.contactandnotes.R;
 import com.nate.contactandnotes.fragment.base.CNBaseFragment;

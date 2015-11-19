@@ -29,7 +29,7 @@
         tl:tl_indicator_color="@color/colorPrimary"
         tl:tl_indicator_height="0dp"
         tl:tl_textSelectColor="@color/colorPrimary"
-        tl:tl_textUnselectColor="@color/secondary_text_color"
+        tl:tl_textUnselectColor="@color/tab_text_color"
         tl:tl_textsize="@dimen/text_font_size_small_12sp"
         tl:tl_underline_color="@color/white"
         tl:tl_underline_height="1dp" />

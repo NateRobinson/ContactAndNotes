@@ -12,9 +12,9 @@ import com.gu.baselibrary.utils.NetUtils;
 import com.gu.baselibrary.view.ForbidViewPager;
 import com.nate.contactandnotes.R;
 import com.nate.contactandnotes.activity.base.CNBaseActivity;
-import com.nate.contactandnotes.fragment.ContactsFragment;
-import com.nate.contactandnotes.fragment.MySettingFragment;
-import com.nate.contactandnotes.fragment.NotesFragment;
+import com.nate.contactandnotes.fragment.home.ContactsFragment;
+import com.nate.contactandnotes.fragment.home.MySettingFragment;
+import com.nate.contactandnotes.fragment.home.NotesFragment;
 import com.nate.contactandnotes.model.TabModel;
 
 import org.xutils.view.annotation.ViewInject;

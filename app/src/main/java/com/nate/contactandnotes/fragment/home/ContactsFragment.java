@@ -1,10 +1,11 @@
-package com.nate.contactandnotes.fragment;
+package com.nate.contactandnotes.fragment.home;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
@@ -15,6 +16,7 @@ import com.nate.contactandnotes.fragment.base.CNBaseFragment;
 import com.nate.contactandnotes.model.ContactModel;
 import com.nate.contactandnotes.temp.Cheeses;
 
+import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
@@ -30,6 +32,8 @@ public class ContactsFragment extends CNBaseFragment {
     private ListView mListView;
     @ViewInject(R.id.contacts_fancy_indexer)
     private FancyIndexer mFancyIndexer;
+    @ViewInject(R.id.empty_view_ll)
+    private LinearLayout emptyView;
     private List<ContactModel> contacts = new ArrayList<>();
     private ContactsListViewAdapter mAdapter;
 
@@ -129,20 +133,13 @@ public class ContactsFragment extends CNBaseFragment {
         });
 
         //设置emptyview
-        View emptyView = LayoutInflater.from(getContext()).inflate(R.layout.contacts_fragment_empty_layout, null);
-        ViewGroup parentView = (ViewGroup) mListView.getParent();
-        RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        emptyView.setLayoutParams(params);
-        parentView.addView(emptyView);
         mListView.setEmptyView(emptyView);
-        emptyView.findViewById(R.id.empty_view_ll).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showToast("添加朋友");
-            }
-        });
     }
 
+    @Event(value = R.id.empty_add_ll)
+    private void onEmptyAdd(View view) {
+        showToast("添加朋友");
+    }
 
     /**
      * 填充,排序
@@ -150,9 +147,9 @@ public class ContactsFragment extends CNBaseFragment {
     private void fillAndSortData() {
         boolean china = getResources().getConfiguration().locale.getCountry().equals("CN");
         String[] datas = china ? Cheeses.NAMES : Cheeses.sCheeseStrings;
-//        for (int i = 0; i < datas.length; i++) {
-//            contacts.add(new ContactModel(datas[i]));
-//        }
+        for (int i = 0; i < datas.length; i++) {
+            contacts.add(new ContactModel(datas[i]));
+        }
         if (contacts.size() > 0) {
             // 排序
             Collections.sort(contacts);
