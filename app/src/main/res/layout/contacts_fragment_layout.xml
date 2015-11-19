@@ -10,7 +10,8 @@
         android:id="@+id/contacts_lv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:divider="@color/transparent"></ListView>
+        android:divider="@color/transparent"
+        android:scrollbars="none"></ListView>
 
     <com.gu.baselibrary.view.FancyIndexer
         android:id="@+id/contacts_fancy_indexer"

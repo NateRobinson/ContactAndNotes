@@ -1,12 +1,12 @@
 package com.nate.contactandnotes.fragment;
 
-import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.gu.baselibrary.view.FancyIndexer;
 import com.nate.contactandnotes.R;
@@ -30,10 +30,8 @@ public class ContactsFragment extends CNBaseFragment {
     private ListView mListView;
     @ViewInject(R.id.contacts_fancy_indexer)
     private FancyIndexer mFancyIndexer;
-    private Handler mHandler = new Handler();
     private List<ContactModel> contacts = new ArrayList<>();
     private ContactsListViewAdapter mAdapter;
-    private View headView;
 
     /**
      * @return Fragment绑定的布局文件id
@@ -84,7 +82,7 @@ public class ContactsFragment extends CNBaseFragment {
         fillAndSortData();
         mAdapter = new ContactsListViewAdapter(getContext(), R.layout.contacts_fragment_item_layout, contacts);
         mListView.setAdapter(mAdapter);
-        headView = LayoutInflater.from(getContext()).inflate(R.layout.contacts_fragment_header_layout, null);
+        View headView = LayoutInflater.from(getContext()).inflate(R.layout.contacts_fragment_header_layout, null);
         mListView.addHeaderView(headView, null, false);
         mFancyIndexer.setOnTouchLetterChangedListener(new FancyIndexer.OnTouchLetterChangedListener() {
             @Override
@@ -129,6 +127,20 @@ public class ContactsFragment extends CNBaseFragment {
                 showToast("分组");
             }
         });
+
+        //设置emptyview
+        View emptyView = LayoutInflater.from(getContext()).inflate(R.layout.contacts_fragment_empty_layout, null);
+        ViewGroup parentView = (ViewGroup) mListView.getParent();
+        RelativeLayout.LayoutParams params=new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        emptyView.setLayoutParams(params);
+        parentView.addView(emptyView);
+        mListView.setEmptyView(emptyView);
+        emptyView.findViewById(R.id.empty_view_ll).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("添加朋友");
+            }
+        });
     }
 
 
@@ -136,13 +148,14 @@ public class ContactsFragment extends CNBaseFragment {
      * 填充,排序
      */
     private void fillAndSortData() {
-        String[] datas = null;
         boolean china = getResources().getConfiguration().locale.getCountry().equals("CN");
-        datas = china ? Cheeses.NAMES : Cheeses.sCheeseStrings;
-        for (int i = 0; i < datas.length; i++) {
-            contacts.add(new ContactModel(datas[i]));
+        String[] datas = china ? Cheeses.NAMES : Cheeses.sCheeseStrings;
+//        for (int i = 0; i < datas.length; i++) {
+//            contacts.add(new ContactModel(datas[i]));
+//        }
+        if (contacts.size() > 0) {
+            // 排序
+            Collections.sort(contacts);
         }
-        // 排序
-        Collections.sort(contacts);
     }
 }
