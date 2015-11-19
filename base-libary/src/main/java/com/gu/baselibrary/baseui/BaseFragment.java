@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,6 @@ import org.xutils.x;
 
 import java.lang.reflect.Field;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -267,57 +265,6 @@ public abstract class BaseFragment extends Fragment {
         if (null != dialog) {
             dialog.dismiss();
         }
-    }
-
-    /**
-     * 成功类型的弹出框
-     *
-     * @param title
-     * @param content
-     */
-    protected void showSweetDialogSuccess(String title, String content) {
-        SweetAlertDialog sd = new SweetAlertDialog(mContext, SweetAlertDialog.SUCCESS_TYPE);
-        sd.setTitleText(title);
-        sd.setConfirmText("好的");
-        sd.setContentText(content);
-        // 可以按返回取消
-        sd.setCancelable(true);
-        // 可以点击外部取消
-        sd.setCanceledOnTouchOutside(true);
-        sd.show();
-    }
-
-    /**
-     * 错误提示类型的弹出框
-     *
-     * @param title
-     * @param content
-     */
-    protected SweetAlertDialog showSweetDialogFail(String title, String content) {
-        SweetAlertDialog sd = new SweetAlertDialog(mContext, SweetAlertDialog.ERROR_TYPE).setTitleText(title);
-        sd.setContentText(content);
-        sd.setConfirmText("好的");
-        sd.show();
-        return sd;
-    }
-
-    /**
-     * 提示类型的弹出框
-     *
-     * @param title
-     * @param content
-     */
-    protected SweetAlertDialog showSweetDialogPrompt(String title, String content) {
-        SweetAlertDialog sd = new SweetAlertDialog(mContext);
-        sd.setTitleText(title);
-        sd.setContentText(content);
-        sd.setConfirmText("确定");
-        // 可以按返回取消
-        sd.setCancelable(false);
-        // 可以点击外部取消
-        sd.setCanceledOnTouchOutside(false);
-        sd.show();
-        return sd;
     }
 
     /**

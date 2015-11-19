@@ -1,10 +1,8 @@
 package com.gu.baselibrary.baseui;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.Window;
@@ -18,7 +16,6 @@ import com.gu.baselibrary.view.LoadingDialog;
 
 import org.xutils.x;
 
-import cn.pedant.SweetAlert.SweetAlertDialog;
 import de.greenrobot.event.EventBus;
 
 /**
@@ -46,8 +43,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     public enum TransitionMode {
         LEFT, RIGHT, TOP, BOTTOM, SCALE, FADE
     }
-
-    private SweetAlertDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -271,87 +266,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (null != dialog) {
             dialog.setTitle(progress);
         }
-    }
-
-
-    /**
-     * 取消一个等待框
-     */
-    protected void dismissLoadingDialog() {
-        if (null != pDialog) {
-            pDialog.dismiss();
-        }
-    }
-
-    /**
-     * 成功类型的弹出框
-     *
-     * @param title
-     * @param content
-     */
-    protected SweetAlertDialog showSweetDialogSuccess(String title, String content) {
-        SweetAlertDialog sd = new SweetAlertDialog(this, SweetAlertDialog.SUCCESS_TYPE);
-        sd.setTitleText(title);
-        sd.setConfirmText("确定");
-        sd.setContentText(content);
-        // 可以按返回取消
-        sd.setCancelable(false);
-        // 可以点击外部取消
-        sd.setCanceledOnTouchOutside(false);
-        sd.show();
-        return sd;
-    }
-
-    /**
-     * 错误提示类型的弹出框
-     *
-     * @param title
-     * @param content
-     */
-    protected SweetAlertDialog showSweetDialogFail(String title, String content) {
-        SweetAlertDialog sd = new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE);
-        sd.setTitleText(title);
-        sd.setContentText(content);
-        sd.setConfirmText("确定");
-        // 可以按返回取消
-        sd.setCancelable(false);
-        // 可以点击外部取消
-        sd.setCanceledOnTouchOutside(false);
-        sd.show();
-        return sd;
-    }
-
-    /**
-     * 提示类型的弹出框
-     *
-     * @param title
-     * @param content
-     */
-    protected SweetAlertDialog showSweetDialogPrompt(String title, String content) {
-        SweetAlertDialog sd = new SweetAlertDialog(this);
-        sd.setTitleText(title);
-        sd.setContentText(content);
-        sd.setConfirmText("确定");
-        // 可以按返回取消
-        sd.setCancelable(false);
-        // 可以点击外部取消
-        sd.setCanceledOnTouchOutside(false);
-        sd.show();
-        return sd;
-    }
-
-    /**
-     * 提示警告
-     */
-    protected SweetAlertDialog showSweetDialogConfirm(String title, String content) {
-        SweetAlertDialog sd = new SweetAlertDialog(this, SweetAlertDialog.WARNING_TYPE);
-        sd.setTitleText(title);
-        sd.setContentText(content);
-        sd.setCancelText("取消");
-        sd.setConfirmText("确定");
-        sd.showCancelButton(true);
-        sd.show();
-        return sd;
     }
 
     /**
