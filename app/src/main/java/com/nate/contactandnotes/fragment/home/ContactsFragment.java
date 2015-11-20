@@ -148,9 +148,9 @@ public class ContactsFragment extends CNBaseFragment {
     private void fillAndSortData() {
         boolean china = getResources().getConfiguration().locale.getCountry().equals("CN");
         String[] datas = china ? Cheeses.NAMES : Cheeses.sCheeseStrings;
-        for (int i = 0; i < datas.length; i++) {
-            contacts.add(new ContactModel(datas[i]));
-        }
+//        for (int i = 0; i < datas.length; i++) {
+//            contacts.add(new ContactModel(datas[i]));
+//        }
         if (contacts.size() > 0) {
             // 排序
             Collections.sort(contacts);
