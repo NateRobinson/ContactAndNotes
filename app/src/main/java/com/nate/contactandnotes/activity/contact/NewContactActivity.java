@@ -97,7 +97,7 @@ public class NewContactActivity extends CNBaseActivity {
 
     @Event(value = R.id.add_new_contact_by_phone_ll)
     private void onAddByPhone(View view) {
-        showToast("从手机联系人中添加");
+        go(AddContactByPhoneActivity.class);
     }
 
     @Event(value = R.id.add_new_contact_by_create_ll)
