@@ -114,7 +114,7 @@ public class AddContactByPhoneActivity extends CNBaseActivity {
         setCustomToolbar(ToolbarType.WITHBACK, R.string.title_add_contact_string);
         // 填充数据, 并排序
         fillAndSortData();
-        mAdapter = new PhoneContactsListViewAdapter(this, R.layout.contacts_fragment_item_layout, contacts);
+        mAdapter = new PhoneContactsListViewAdapter(this, R.layout.add_contact_by_phone_activity_item_layout, contacts);
         mListView.setAdapter(mAdapter);
         mFancyIndexer.setOnTouchLetterChangedListener(new FancyIndexer.OnTouchLetterChangedListener() {
             @Override

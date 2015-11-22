@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.gu.baselibrary.utils.Toastor;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -162,7 +164,7 @@ public abstract class MyBaseAdapter<T> extends ArrayAdapter<T> {
      */
     protected void showToast(String msg) {
         if (!TextUtils.isEmpty(msg)) {
-            Snackbar.make(parent, msg, Snackbar.LENGTH_SHORT).show();
+            new Toastor(getContext()).showSingletonToast(msg);
         }
     }
 
@@ -172,10 +174,7 @@ public abstract class MyBaseAdapter<T> extends ArrayAdapter<T> {
      * @param msgId
      */
     protected void showToast(int msgId) {
-        String msg = getContext().getApplicationContext().getResources().getString(msgId);
-        if (!TextUtils.isEmpty(msg)) {
-            Snackbar.make(parent, msg, Snackbar.LENGTH_SHORT).show();
-        }
+        new Toastor(getContext()).showSingletonToast(msgId);
     }
 
 }

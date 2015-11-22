@@ -28,7 +28,7 @@ public class PhoneContactsListViewAdapter extends MyBaseAdapter<PhoneContactMode
      * @Description: 抽象方法，由子类去实现每个itme如何设置
      */
     @Override
-    public void setConvert(BaseViewHolder viewHolder, PhoneContactModel contactModel) {
+    public void setConvert(BaseViewHolder viewHolder, final PhoneContactModel contactModel) {
         String currentLetter = contactModel.getPinyin().charAt(0) + "";
         String indexStr = null;
         if (viewHolder.getPosition() == 0) {
@@ -44,5 +44,11 @@ public class PhoneContactsListViewAdapter extends MyBaseAdapter<PhoneContactMode
         }
         viewHolder.getView(R.id.contacts_item_index_tv).setVisibility(indexStr == null ? View.GONE : View.VISIBLE);
         viewHolder.setTextView(R.id.contacts_item_index_tv, indexStr).setTextView(R.id.contacts_item_name_tv, contactModel.getName());
+        viewHolder.getView(R.id.add_contact_by_phone_activity_item_add_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showToast("点击了" + contactModel.getName());
+            }
+        });
     }
 }
