@@ -10,5 +10,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start_desc_string"
-        android:textSize="@dimen/text_font_size_big_24sp" />
+        android:textSize="@dimen/text_font_size_big_22sp" />
 </LinearLayout>

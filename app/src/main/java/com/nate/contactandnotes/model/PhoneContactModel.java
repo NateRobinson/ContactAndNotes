@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.sql.Date;
 
 /**
- * Created by Administrator on 2015/11/17.联系人实体类
+ * Created by Nate on 2015/11/17.联系人实体类
  */
 @Table(name = "phonecontactmodel")
 public class PhoneContactModel implements Serializable, Comparable<PhoneContactModel> {

@@ -10,5 +10,5 @@
         android:layout_height="wrap_content"
         android:text="Recent_Notes"
         android:textColor="@color/primary_text_color"
-        android:textSize="@dimen/text_font_size_big_24sp" />
+        android:textSize="@dimen/text_font_size_big_22sp" />
 </LinearLayout>

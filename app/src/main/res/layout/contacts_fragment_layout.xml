@@ -54,7 +54,7 @@
                 android:layout_marginTop="@dimen/top_margin_big_16dp"
                 android:text="联系人为空,点击添加"
                 android:textColor="@color/secondary_text_color"
-                android:textSize="@dimen/text_font_size_big_24sp" />
+                android:textSize="@dimen/text_font_size_big_22sp" />
         </LinearLayout>
     </LinearLayout>
 

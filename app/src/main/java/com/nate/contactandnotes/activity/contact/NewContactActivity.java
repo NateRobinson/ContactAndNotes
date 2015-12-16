@@ -10,7 +10,7 @@ import com.nate.contactandnotes.activity.base.CNBaseActivity;
 import org.xutils.view.annotation.Event;
 
 /**
- * Created by Administrator on 2015/11/19.新的朋友界面
+ * Created by Nate on 2015/11/19.新的朋友界面
  */
 public class NewContactActivity extends CNBaseActivity {
     /**

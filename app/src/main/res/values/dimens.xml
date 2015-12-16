@@ -1,6 +1,6 @@
 <resources>
     <!-- 字体大小-->
-    <dimen name="text_font_size_big_24sp">24sp</dimen>
+    <dimen name="text_font_size_big_22sp">22sp</dimen>
     <dimen name="text_font_size_title_18sp">18sp</dimen>
     <dimen name="text_font_size_title2_16sp">16sp</dimen>
     <dimen name="text_font_size_content_14sp">14sp</dimen>

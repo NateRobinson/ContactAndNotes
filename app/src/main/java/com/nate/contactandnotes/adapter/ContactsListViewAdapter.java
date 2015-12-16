@@ -12,7 +12,7 @@ import com.nate.contactandnotes.model.ContactModel;
 import java.util.List;
 
 /**
- * Created by Administrator on 2015/11/18.联系人界面的adapter
+ * Created by Nate on 2015/11/18.联系人界面的adapter
  */
 public class ContactsListViewAdapter extends MyBaseAdapter<ContactModel> {
     public ContactsListViewAdapter(Context context, int resource, List<ContactModel> list) {

@@ -7,7 +7,7 @@ import com.gu.baselibrary.baseui.BaseActivity;
 import com.nate.contactandnotes.R;
 
 /**
- * Created by Administrator on 2015/11/16. contact and notes app base activity
+ * Created by Nate on 2015/11/16. contact and notes app base activity
  */
 public abstract class CNBaseActivity extends BaseActivity {
 
