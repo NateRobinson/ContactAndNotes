@@ -161,32 +161,33 @@ public class AddContactByPhoneActivity extends CNBaseActivity {
      */
     private void fillAndSortData() {
         //先查询PhoneContactModel的数据
-        try {
-            contacts = DBController.queryAllPhoneContactModel();
+        contacts = DBController.selectAllPhoneContactModel();
+        if (contacts == null || contacts.size() == 0) {
+            //执行查询与导入操作
+            getContactsFromPhoneAndSave();
             if (contacts == null || contacts.size() == 0) {
-                //执行查询与导入操作
-                getContactsFromPhoneAndSave();
-                if (contacts == null || contacts.size() == 0) {
-                    showToast("手机联系人为空，请尝试手动添加");
-                    finish();
-                } else {
-                    fillAndSortData();
-                }
+                showToast("手机联系人为空，请尝试手动添加");
+                finish();
             } else {
-                if (contacts.size() > 0) {
-                    // 排序
-                    Collections.sort(contacts);
-                }
+                fillAndSortData();
             }
-        } catch (DbException e) {
-            e.printStackTrace();
+        } else {
+            if (contacts.size() > 0) {
+                // 排序
+                Collections.sort(contacts);
+            }
         }
     }
 
 
+    /**
+     * 查询手机上的联系人，组装成contacts，然后调用DBController.insertPhoneContactModels方法插入到应用的数据库中
+     *
+     * @throws DbException
+     */
     @SuppressWarnings("deprecation")
-    private void getContactsFromPhoneAndSave() throws DbException {
-        contacts=new ArrayList<>();
+    private void getContactsFromPhoneAndSave() {
+        contacts = new ArrayList<>();
         ContentResolver resolver = this.getContentResolver();
         phoneCursor =
                 resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI,

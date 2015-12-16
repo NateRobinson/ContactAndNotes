@@ -13,6 +13,7 @@ import com.gu.baselibrary.view.FancyIndexer;
 import com.nate.contactandnotes.R;
 import com.nate.contactandnotes.activity.contact.NewContactActivity;
 import com.nate.contactandnotes.adapter.ContactsListViewAdapter;
+import com.nate.contactandnotes.db.DBController;
 import com.nate.contactandnotes.fragment.base.CNBaseFragment;
 import com.nate.contactandnotes.model.ContactModel;
 import com.nate.contactandnotes.temp.Cheeses;
@@ -151,7 +152,9 @@ public class ContactsFragment extends CNBaseFragment {
 //        for (int i = 0; i < datas.length; i++) {
 //            contacts.add(new ContactModel(datas[i]));
 //        }
-        if (contacts.size() > 0) {
+
+        contacts = DBController.selectAllContactModel();
+        if (contacts != null && contacts.size() > 0) {
             // 排序
             Collections.sort(contacts);
         }
