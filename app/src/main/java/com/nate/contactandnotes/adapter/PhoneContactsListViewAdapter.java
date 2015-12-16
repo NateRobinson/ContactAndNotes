@@ -57,6 +57,7 @@ public class PhoneContactsListViewAdapter extends MyBaseAdapter<PhoneContactMode
                 contactModel.setCreateDate(new Date(System.currentTimeMillis()));
                 if (DBController.insertContactModel(contactModel)) {
                     showToast("添加成功");
+                    phoneContactModel.setIsAdded(true);
                     DBController.updatePhoneContactModel(phoneContactModel);
                 } else {
                     showToast("添加失败");
